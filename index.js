@@ -28,7 +28,7 @@ const dialogflowFulfillment = (request, response) => {
     const agent = new WebhookClient({request, response})
 
     function sayHello(agent){
-        agent.add("Hello, I can help you with the weather")
+        agent.add("Hello, weather")
     }
     
     function weather(agent){
