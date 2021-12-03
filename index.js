@@ -32,15 +32,15 @@ const dialogflowFulfillment = (request, response) => {
     }
     
     function weather(agent){
-        let city = request.body.queryResult.parameters['city']; // city is a required param
+        //let city = request.body.queryResult.parameters['city']; // city is a required param
 
         // Get the date for the weather forecast (if present)
-        let date = '';
-        if (req.body.queryResult.parameters['date']) {
-            date = req.body.queryResult.parameters['date'];
-            console.log('Date: ' + date);
-        } 
-        agent.add(city + ' '+ date);
+        //let date = '';
+        //if (req.body.queryResult.parameters['date']) {
+            //date = req.body.queryResult.parameters['date'];
+            //console.log('Date: ' + date);
+        //} 
+        agent.add("hii");
 
         // Call the weather API
         //callWeatherApi(city, date).then((output) => {
