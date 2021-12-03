@@ -4,7 +4,8 @@ const cors = require('cors')
 const {WebhookClient} = require('dialogflow-fulfillment');
 
 const app = express()
-app.use(bodyParser.json())
+app.use(express.urlencoded({extended : false}));
+app.use(express.json());
 app.use(cors());
 const port = process.env.PORT || 5000
 
