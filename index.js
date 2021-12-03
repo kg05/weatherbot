@@ -15,9 +15,9 @@ app.get('/', (request, res) => {
     }
 )
 
-app.post("/dialogflow-fulfillment", (req, res) => {
+app.post("/dialogflow-fulfillment", (request, response) => {
     res.send('hii');
-    //dialogflowFulfillment(req, res);
+    dialogflowFulfillment(request, response);
 });
 
 const port = process.env.PORT || 5000;
