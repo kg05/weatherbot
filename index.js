@@ -40,13 +40,14 @@ const dialogflowFulfillment = (request, response) => {
             date = req.body.queryResult.parameters['date'];
             console.log('Date: ' + date);
         } 
+        agent.add(city + ' '+ date);
 
         // Call the weather API
-        callWeatherApi(city, date).then((output) => {
-            res.json({ 'fulfillmentText': output }); // Return the results of the weather API to Dialogflow
-        }).catch(() => {
-            res.json({ 'fulfillmentText': `I don't know the weather but I hope it's good!` });
-        });
+        //callWeatherApi(city, date).then((output) => {
+            //res.json({ 'fulfillmentText': output }); // Return the results of the weather API to Dialogflow
+        //}).catch(() => {
+            //res.json({ 'fulfillmentText': `I don't know the weather but I hope it's good!` });
+        //});
     }
 
     let intentMap = new Map();
