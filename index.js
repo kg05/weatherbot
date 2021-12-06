@@ -40,7 +40,7 @@ const dialogflowFulfillment = (request, response) => {
             date = req.body.queryResult.parameters['date'];
             console.log('Date: ' + date);
         } 
-        agent.add(city);
+        agent.add("hii");
 
         // Call the weather API
         //callWeatherApi(city, date).then((output) => {
