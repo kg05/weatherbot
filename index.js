@@ -56,12 +56,13 @@ const dialogflowFulfillment = (request, response) => {
         '&q=' + encodeURIComponent(city) + '&key=' + wwoApiKey + '&date=' + date;
         console.log('API Request: ' + host + path);*/
         
-        requests(`https://samples.openweathermap.org/data/2.5/forecast?q=alwar&appid=33a075af58b12e8003f6600adbe9194b`,
+        requests(`https://samples.openweathermap.org/data/2.5/forecast?q=${city}&appid=33a075af58b12e8003f6600adbe9194b`,
 		    function(error, response1, body) {
 			    console.log(body)
 			    let data = JSON.parse(body);
 			    if (response1.statusCode === 200) {
-				    response.send(`The weather in your city "alwar" is ${data.list[0].weather[0].description}`);
+				    response.send(`The weather in your city "${city}" is ${data.list[0].weather[0].description}`);
+				    agent.add("hii")
 			    }
 		    }
 	    );
