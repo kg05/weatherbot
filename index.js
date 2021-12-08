@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const http = require('http')
+const request = require('request')
 const {WebhookClient} = require('dialogflow-fulfillment');
 
 const app = express()
@@ -43,11 +44,20 @@ const dialogflowFulfillment = (request, response) => {
         } 
         //agent.add(city);
         
-        let path = '/premium/v1/weather.ashx?format=json&num_of_days=1' +
+        /*let path = '/premium/v1/weather.ashx?format=json&num_of_days=1' +
         '&q=' + encodeURIComponent(city) + '&key=' + wwoApiKey + '&date=' + date;
-        console.log('API Request: ' + host + path);
+        console.log('API Request: ' + host + path);*/
+        
+        request(`https://samples.openweathermap.org/data/2.5/forecast?q=a${city}&appid=33a075af58b12e8003f6600adbe9194b`,
+		    function(error, response1, body) {
+			    let data = JSON.parse(body);
+			    if (response1.statusCode === 200) {
+				    response.send(`The weather in your city "${city}" is ${data.list[0].weather[0].description}`);
+			    }
+		    }
+	    );
   
-        agent.add(path);
+        //agent.add(path);
       // Make the HTTP request to get the weather
         /*http.get({host: host, path: path}, (res) => {
             let body = ''; // var to store the response chunks
