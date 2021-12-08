@@ -61,8 +61,9 @@ const dialogflowFulfillment = (request, response) => {
 			    console.log(body)
 			    let data = JSON.parse(body);
 			    if (response1.statusCode === 200) {
-				    response.send(`The weather in your city "${city}" is ${data.list[0].weather[0].description}`);
-				    agent.add("hii")
+				    let output = `The weather in your city "${city}" is ${data.list[0].weather[0].description}`;
+				    response.json({ 'fulfillmentText': output });
+				    //agent.add("hii")
 			    }
 		    }
 	    );
