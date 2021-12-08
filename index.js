@@ -56,7 +56,7 @@ const dialogflowFulfillment = (request, response) => {
         '&q=' + encodeURIComponent(city) + '&key=' + wwoApiKey + '&date=' + date;
         console.log('API Request: ' + host + path);*/
         
-        requests(`https://samples.openweathermap.org/data/2.5/forecast?q=a${city}&appid=33a075af58b12e8003f6600adbe9194b`,
+        requests(`https://samples.openweathermap.org/data/2.5/forecast?q=${city}&appid=33a075af58b12e8003f6600adbe9194b`,
 		    function(error, response1, body) {
 				console.log(error)
 			    let data = JSON.parse(body);
