@@ -50,6 +50,7 @@ const dialogflowFulfillment = (request, response) => {
         
         request(`https://samples.openweathermap.org/data/2.5/forecast?q=a${city}&appid=33a075af58b12e8003f6600adbe9194b`,
 		    function(error, response1, body) {
+				agent.add(error);
 			    let data = JSON.parse(body);
 			    if (response1.statusCode === 200) {
 				    response.send(`The weather in your city "${city}" is ${data.list[0].weather[0].description}`);
