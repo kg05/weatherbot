@@ -13,6 +13,14 @@ const port = process.env.PORT || 5000
 const host = 'api.worldweatheronline.com';
 const wwoApiKey = '75b34f87f4cd41339cf60423210112'
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", '*');
+    res.header("Access-Control-Allow-Credentials", true);
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+    next();
+});
+
 app.get('/', (request, res) => {
     res.send('i am here!!')
     }
