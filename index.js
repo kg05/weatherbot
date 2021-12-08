@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const http = require('http')
 const {WebhookClient} = require('dialogflow-fulfillment');
 
 const app = express()
@@ -40,35 +41,17 @@ const dialogflowFulfillment = (request, response) => {
             date = request.body.queryResult.parameters['date'];
             console.log('Date: ' + date);
         } 
-        agent.add(city);
-
-        // Call the weather API
-        //callWeatherApi(city, date).then((output) => {
-            //response.json({ 'fulfillmentText': output }); // Return the results of the weather API to Dialogflow
-        //}).catch(() => {
-            //response.json({ 'fulfillmentText': `I don't know the weather but I hope it's good!` });
-        //});
-    }
-
-    let intentMap = new Map();
-    intentMap.set("Default Welcome Intent", sayHello)
-    intentMap.set("GetWeather", weather)
-    agent.handleRequest(intentMap)
-
-}
-
-function callWeatherApi (city, date) {
-    return new Promise((resolve, reject) => {
-      // Create the path for the HTTP request to get the weather
-      let path = '/premium/v1/weather.ashx?format=json&num_of_days=1' +
+        //agent.add(city);
+        
+        let path = '/premium/v1/weather.ashx?format=json&num_of_days=1' +
         '&q=' + encodeURIComponent(city) + '&key=' + wwoApiKey + '&date=' + date;
-      console.log('API Request: ' + host + path);
+        console.log('API Request: ' + host + path);
   
       // Make the HTTP request to get the weather
-      http.get({host: host, path: path}, (res) => {
-        let body = ''; // var to store the response chunks
-        res.on('data', (d) => { body += d; }); // store each response chunk
-        res.on('end', () => {
+        http.get({host: host, path: path}, (res) => {
+            let body = ''; // var to store the response chunks
+            res.on('data', (d) => { body += d; }); // store each response chunk
+            res.on('end', () => {
           // After all the data has been received parse the JSON for desired data
           let response = JSON.parse(body);
           let forecast = response['data']['weather'][0];
@@ -85,12 +68,21 @@ function callWeatherApi (city, date) {
   
           // Resolve the promise with the output text
           console.log(output);
-          resolve(output);
-        });
-        res.on('error', (error) => {
-          console.log(`Error calling the weather API: ${error}`)
-          reject();
-        });
-      });
-    });
+          agent.add(output);
+        
+
+        // Call the weather API
+        //callWeatherApi(city, date).then((output) => {
+            //response.json({ 'fulfillmentText': output }); // Return the results of the weather API to Dialogflow
+        //}).catch(() => {
+            //response.json({ 'fulfillmentText': `I don't know the weather but I hope it's good!` });
+        //});
+    }
+
+    let intentMap = new Map();
+    intentMap.set("Default Welcome Intent", sayHello)
+    intentMap.set("GetWeather", weather)
+    agent.handleRequest(intentMap)
+
 }
+
