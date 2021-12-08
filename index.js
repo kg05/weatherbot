@@ -30,7 +30,7 @@ const dialogflowFulfillment = (request, response) => {
     const agent = new WebhookClient({request, response})
 
     function sayHello(agent){
-        agent.add("Hello, weather")
+        response.send("Hello, weather")
     }
     
     function weather(agent){
