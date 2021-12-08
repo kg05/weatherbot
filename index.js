@@ -2,7 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const http = require('http')
-const request = require('request')
+const requests = require('request')
 const {WebhookClient} = require('dialogflow-fulfillment');
 
 const app = express()
@@ -56,7 +56,7 @@ const dialogflowFulfillment = (request, response) => {
         '&q=' + encodeURIComponent(city) + '&key=' + wwoApiKey + '&date=' + date;
         console.log('API Request: ' + host + path);*/
         
-        request(`https://samples.openweathermap.org/data/2.5/forecast?q=a${city}&appid=33a075af58b12e8003f6600adbe9194b`,
+        requests(`https://samples.openweathermap.org/data/2.5/forecast?q=a${city}&appid=33a075af58b12e8003f6600adbe9194b`,
 		    function(error, response1, body) {
 				console.log(error)
 			    let data = JSON.parse(body);
