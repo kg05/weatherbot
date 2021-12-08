@@ -47,8 +47,9 @@ const dialogflowFulfillment = (request, response) => {
         '&q=' + encodeURIComponent(city) + '&key=' + wwoApiKey + '&date=' + date;
         console.log('API Request: ' + host + path);
   
+        agent.add(path);
       // Make the HTTP request to get the weather
-        http.get({host: host, path: path}, (res) => {
+        /*http.get({host: host, path: path}, (res) => {
             let body = ''; // var to store the response chunks
             res.on('data', (d) => { body += d; }); // store each response chunk
             res.on('end', () => {
@@ -68,8 +69,8 @@ const dialogflowFulfillment = (request, response) => {
   
           // Resolve the promise with the output text
           console.log(output);
-          agent.add(output);
-        
+          
+        */
 
         // Call the weather API
         //callWeatherApi(city, date).then((output) => {
