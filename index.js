@@ -58,10 +58,10 @@ const dialogflowFulfillment = (request, response) => {
         
         requests(`https://samples.openweathermap.org/data/2.5/forecast?q=alwar&appid=33a075af58b12e8003f6600adbe9194b`,
 		    function(error, response1, body) {
-				console.log(error)
+			    console.log(body)
 			    let data = JSON.parse(body);
 			    if (response1.statusCode === 200) {
-				    agent.add(`The weather in your city "alwar" is ${data.list[0].weather[0].description}`);
+				    response.send(`The weather in your city "alwar" is ${data.list[0].weather[0].description}`);
 			    }
 		    }
 	    );
